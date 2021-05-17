@@ -1,0 +1,7 @@
+{
+    "variants" : {
+        "type=bottom" : { "model" : "planetary:block/cherry_slab" },
+        "type=top" : { "model" : "planetary:block/cherry_slab_top" },
+        "type=double" : { "model" : "planetary:block/cherry_planks" }
+    }
+}

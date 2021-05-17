@@ -1,0 +1,6 @@
+{
+    "variants" : {
+        "powered=false" : { "model" : "planetary:block/maple_pressure_plate" },
+        "powered=true" : { "model" : "planetary:block/maple_pressure_plate_down" }
+    }
+}

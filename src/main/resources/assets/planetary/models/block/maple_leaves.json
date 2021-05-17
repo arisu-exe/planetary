@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/leaves",
+    "textures": {
+        "all": "planetary:block/leaves_maple"
+    }
+}

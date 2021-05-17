@@ -1,0 +1,7 @@
+{
+    "parent" : "minecraft:block/cube_column",
+    "textures" : {
+        "end" : "planetary:block/neondot_stem_top",
+        "side" : "planetary:block/neondot_stem"
+	}
+}

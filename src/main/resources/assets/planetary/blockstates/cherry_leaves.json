@@ -1,0 +1,5 @@
+{
+    "variants" : {
+        "" : { "model" : "planetary:block/cherry_leaves" }
+    }
+}

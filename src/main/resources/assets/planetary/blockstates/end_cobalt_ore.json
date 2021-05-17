@@ -1,0 +1,7 @@
+{
+	"variants" : {
+    	"" : {
+			"model" : "planetary:block/end_cobalt_ore"
+		}
+	}
+}

@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "hanging=true": { "model": "planetary:block/hanging_shroomglow_lantern"},
+        "hanging=false": { "model": "planetary:block/shroomglow_lantern"}
+  }
+}

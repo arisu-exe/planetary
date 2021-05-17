@@ -1,0 +1,8 @@
+{
+	"variants" : {
+    	"facing=north" : { "model" : "planetary:block/maple_tap" },
+        "facing=east" :  { "model" : "planetary:block/maple_tap", "y" : 90 },
+        "facing=south" : { "model" : "planetary:block/maple_tap", "y" : 180 },
+        "facing=west" :  { "model" : "planetary:block/maple_tap", "y" : 270 }
+    }
+}

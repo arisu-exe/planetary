@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "attached=false,facing=north": { "model": "planetary:block/skycap" },
+    "attached=false,facing=east": { "model": "planetary:block/skycap" },
+    "attached=false,facing=south": { "model": "planetary:block/skycap" },
+    "attached=false,facing=west": { "model": "planetary:block/skycap" },
+
+    "attached=true,facing=north": { "model": "planetary:block/skycap_attached" },
+    "attached=true,facing=east": { "model": "planetary:block/skycap_attached", "y" : 90 },
+    "attached=true,facing=south": { "model": "planetary:block/skycap_attached", "y" : 180 },
+    "attached=true,facing=west": { "model": "planetary:block/skycap_attached", "y" : 270 }
+  }
+}

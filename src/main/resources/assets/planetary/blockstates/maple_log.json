@@ -1,0 +1,7 @@
+{
+    "variants" : {
+        "axis=y" :  { "model" : "planetary:block/maple_log" },
+        "axis=z" :   { "model" : "planetary:block/maple_log", "x" : 90 },
+        "axis=x" :   { "model" : "planetary:block/maple_log", "x" : 90, "y" : 90 }
+    }
+}

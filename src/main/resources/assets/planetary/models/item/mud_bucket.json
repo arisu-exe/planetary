@@ -1,0 +1,7 @@
+{
+    "parent" : "forge:item/bucket",
+    "textures" : {
+        "base" : "minecraft:item/bucket",
+        "fluid" : "forge:item/mask/bucket_fluid"
+    }
+}

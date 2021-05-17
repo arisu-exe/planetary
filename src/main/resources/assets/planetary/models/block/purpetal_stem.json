@@ -1,0 +1,7 @@
+{
+    "parent" : "minecraft:block/cube_column",
+    "textures" : {
+        "end" : "planetary:block/purpetal_stem_top",
+        "side" : "planetary:block/purpetal_stem"
+	}
+}

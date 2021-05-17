@@ -1,0 +1,7 @@
+{
+    "variants" : {
+        "axis=y" :  { "model" : "planetary:block/brimshine_stem" },
+        "axis=z" :   { "model" : "planetary:block/brimshine_stem", "x" : 90 },
+        "axis=x" :   { "model" : "planetary:block/brimshine_stem", "x" : 90, "y" : 90 }
+    }
+}
