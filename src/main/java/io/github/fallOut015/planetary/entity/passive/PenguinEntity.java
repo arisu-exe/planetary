@@ -1,10 +1,14 @@
 package io.github.fallOut015.planetary.entity.passive;
 
+import io.github.fallOut015.planetary.client.renderer.entity.PenguinRenderer;
+import io.github.fallOut015.planetary.entity.EntitiesPlanetary;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,59 +32,59 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class PenguinEntity extends AnimalEntity {
-    private static final DataParameter<ItemStack> FISH = EntityDataManager.createKey(PenguinEntity.class, DataSerializers.ITEMSTACK);
-    private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(PenguinEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<ItemStack> FISH = EntityDataManager.defineId(PenguinEntity.class, DataSerializers.ITEM_STACK);
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.defineId(PenguinEntity.class, DataSerializers.INT);
     // penguins have a separate pose for when swimming
     // penguins guard their babies
     // eat fish and feed to babies
-    private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.SALMON, Items.COD);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.SALMON, Items.COD);
 
     public PenguinEntity(EntityType<? extends PenguinEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
     @Override
-    public AgeableEntity func_241840_a(ServerWorld serverWorld, AgeableEntity p_241840_2_) {
-        return EntityTypeTwo.PENGUIN.get().create(serverWorld);
+    public AgeableEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity p_241840_2_) {
+        return EntitiesPlanetary.PENGUIN.get().create(serverWorld);
     }
 
     public static AttributeModifierMap.MutableAttribute applyAttributes() {
-        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.19F).createMutableAttribute(Attributes.MAX_HEALTH, 5.0D);
+        return MobEntity.createMobAttributes().add(Attributes.MOVEMENT_SPEED, (double)0.19F).add(Attributes.MAX_HEALTH, 5.0D);
     }
     @Override
-    protected void registerData() {
-        super.registerData();
+    protected void defineSynchedData() {
+        super.defineSynchedData();
 
-        this.dataManager.register(FISH, ItemStack.EMPTY);
-        this.dataManager.register(VARIANT, 0);
+        this.entityData.define(FISH, ItemStack.EMPTY);
+        this.entityData.define(VARIANT, 0);
     }
     @Override
-    public void readAdditional(CompoundNBT nbt) {
-        super.readAdditional(nbt);
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
 
         ItemStack fish = ItemStack.EMPTY;
         fish.deserializeNBT((CompoundNBT) nbt.get("FISH"));
-        this.dataManager.set(FISH, fish);
-        this.dataManager.set(VARIANT, nbt.getInt("VARIANT"));
+        this.entityData.set(FISH, fish);
+        this.entityData.set(VARIANT, nbt.getInt("VARIANT"));
     }
     @Override
-    public void writeAdditional(CompoundNBT nbt) {
-        super.writeAdditional(nbt);
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
 
-        nbt.put("FISH", this.dataManager.get(FISH).serializeNBT());
-        nbt.putInt("VARIANT", this.dataManager.get(VARIANT).intValue());
+        nbt.put("FISH", this.entityData.get(FISH).serializeNBT());
+        nbt.putInt("VARIANT", this.entityData.get(VARIANT).intValue());
     }
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, true, TEMPTATION_ITEMS) {
             @Override
-            public boolean shouldContinueExecuting() {
-                return this.creature instanceof PenguinEntity && !((PenguinEntity) this.creature).hasFish() && super.shouldContinueExecuting();
+            public boolean canContinueToUse() {
+                return this.mob instanceof PenguinEntity && !((PenguinEntity) this.mob).hasFish() && super.canContinueToUse();
             }
             @Override
-            public boolean shouldExecute() {
-                return this.creature instanceof PenguinEntity && !((PenguinEntity) this.creature).hasFish() && super.shouldExecute();
+            public boolean canUse() {
+                return this.mob instanceof PenguinEntity && !((PenguinEntity) this.mob).hasFish() && super.canUse();
             }
         });
         this.goalSelector.addGoal(3, new PenguinEntity.FeedChildGoal(this, 1.0D, 10));
@@ -92,59 +96,59 @@ public class PenguinEntity extends AnimalEntity {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFishEntity.class, false));
     }
     @Override
-    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
-        this.setVariant(this.rand.nextInt(PenguinRenderer.TEXTURE.length));
+    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+        this.setVariant(this.random.nextInt(PenguinRenderer.TEXTURE.length));
 
-        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     public boolean hasFish() {
-        return !this.dataManager.get(FISH).isEmpty();
+        return !this.entityData.get(FISH).isEmpty();
     }
     public ItemStack getFish() {
-        return this.dataManager.get(FISH);
+        return this.entityData.get(FISH);
     }
     public void setFish(ItemStack fish) {
         if(fish.getItem() == Items.SALMON || fish.getItem() == Items.COD) {
-            this.dataManager.set(FISH, fish);
+            this.entityData.set(FISH, fish);
         }
     }
     public void removeFish() {
-        this.dataManager.set(FISH, ItemStack.EMPTY);
+        this.entityData.set(FISH, ItemStack.EMPTY);
     }
     public int getVariant() {
-        return this.dataManager.get(VARIANT).intValue();
+        return this.entityData.get(VARIANT).intValue();
     }
     public void setVariant(int value) {
-        this.dataManager.set(VARIANT, value);
+        this.entityData.set(VARIANT, value);
     }
 
     @Override
-    public ActionResultType func_230254_b_(PlayerEntity playerEntity, Hand hand) {
-        if(!this.isChild() && playerEntity.getHeldItem(hand).getItem() == Items.SALMON || playerEntity.getHeldItem(hand).getItem() == Items.COD) {
-            this.setFish(new ItemStack(playerEntity.getHeldItem(hand).getItem()));
-            playerEntity.getHeldItem(hand).shrink(1);
-        } else if(playerEntity.getHeldItem(hand).isEmpty() && this.hasFish()) {
-            playerEntity.setHeldItem(hand, this.getFish());
+    public ActionResultType mobInteract(PlayerEntity playerEntity, Hand hand) {
+        if(!this.isBaby() && playerEntity.getItemInHand(hand).getItem() == Items.SALMON || playerEntity.getItemInHand(hand).getItem() == Items.COD) {
+            this.setFish(new ItemStack(playerEntity.getItemInHand(hand).getItem()));
+            playerEntity.getItemInHand(hand).shrink(1);
+        } else if(playerEntity.getItemInHand(hand).isEmpty() && this.hasFish()) {
+            playerEntity.setItemInHand(hand, this.getFish());
             this.removeFish();
         }
 
         return ActionResultType.CONSUME;
     }
     @Override
-    protected void collideWithEntity(Entity entityIn) {
+    public void push(Entity entityIn) {
         if(entityIn.getType() == EntityType.SALMON) {
             entityIn.remove();
             this.setFish(new ItemStack(Items.SALMON));
         } else if(entityIn.getType() == EntityType.COD) {
             entityIn.remove();
             this.setFish(new ItemStack(Items.COD));
-        } else if(entityIn instanceof PenguinEntity && entityIn.getType() == EntityTypeTwo.PENGUIN.get() && ((PenguinEntity) entityIn).isChild()) {
+        } else if(entityIn instanceof PenguinEntity && entityIn.getType() == EntitiesPlanetary.PENGUIN.get() && ((PenguinEntity) entityIn).isBaby()) {
             ((PenguinEntity) entityIn).setFish(this.getFish());
             this.removeFish();
         }
 
-        super.collideWithEntity(entityIn);
+        super.push(entityIn);
     }
 
     public class FeedChildGoal extends Goal {
@@ -157,17 +161,17 @@ public class PenguinEntity extends AnimalEntity {
             this.creature = (PenguinEntity) creatureIn;
             this.speed = speedIn;
             this.distance = distanceIn;
-            this.navigator = creatureIn.getNavigator();
+            this.navigator = creatureIn.getNavigation();
 
-            this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
 
         @Override
-        public boolean shouldExecute() {
+        public boolean canUse() {
             return this.creature.hasFish();
         }
         @Override
-        public boolean shouldContinueExecuting() {
+        public boolean canContinueToUse() {
             return this.creature.hasFish();
         }
         @Override
@@ -175,14 +179,14 @@ public class PenguinEntity extends AnimalEntity {
             // Find the nearest child penguin with the least health.
             float minhealth = this.creature.getMaxHealth();
             @Nullable Entity target = null;
-            for(PenguinEntity penguin : this.creature.getEntityWorld().getEntitiesWithinAABB(EntityTypeTwo.PENGUIN.get(), new AxisAlignedBB(new BlockPos(this.creature.getPositionVec())).grow(this.distance), penguin -> penguin.isChild())) {
+            for(PenguinEntity penguin : this.creature.level.getEntities(EntitiesPlanetary.PENGUIN.get(), new AxisAlignedBB(new BlockPos(this.creature.position())).inflate(this.distance), penguin -> penguin.isBaby())) {
                 if(penguin.getHealth() < minhealth) {
                     minhealth = penguin.getHealth();
                     target = penguin;
                 }
             }
             if(target != null) {
-                this.navigator.setPath(this.navigator.getPathToEntity(target, (int) this.distance), this.speed);
+                this.navigator.moveTo(this.navigator.createPath(target, (int) this.distance), this.speed);
             }
 
             super.tick();

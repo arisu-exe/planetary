@@ -6,7 +6,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -21,32 +20,32 @@ public class IceSlimeEntity extends SlimeEntity {
     }
 
     @Override
-    protected void dealDamage(LivingEntity entityIn) {
-        if (this.isAlive()) {
-            int i = this.getSlimeSize();
-            if (this.getDistanceSq(entityIn) < 0.6D * (double)i * 0.6D * (double)i && this.canEntityBeSeen(entityIn) && entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), this.func_225512_er_())) {
-                this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-                this.applyEnchantments(this, entityIn);
-                entityIn.addPotionEffect(new EffectInstance(EffectsTwo.FROSTY.get(), 100, 1, false, true));
+    protected void dealDamage(LivingEntity target) {
+        if(this.isAlive()) {
+            int i = this.getSize();
+            if (this.distanceToSqr(target) < 0.6D * (double)i * 0.6D * (double)i && this.canSee(target) && target.hurt(DamageSource.mobAttack(this), this.getAttackDamage())) {
+                this.playSound(SoundEvents.SLIME_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                this.doEnchantDamageEffects(this, target);
+                // make frozen
             }
         }
     }
     @Override
     protected int getJumpDelay() {
-        return this.rand.nextInt(30) + 20;
+        return this.random.nextInt(30) + 20;
     }
     @Override
-    protected IParticleData getSquishParticle() {
+    protected IParticleData getParticleType() {
         return ParticleTypes.ITEM_SNOWBALL; // TODO change to icy slime ball
     }
     @Override
     public void tick() {
         super.tick();
-        if (this.world.isRemote) {
-            double x = this.getPosX() - this.getWidth() / 2 + this.rand.nextInt((int) this.getWidth() + 1);
-            double y = this.getPosY() - this.getHeight() / 2 + this.rand.nextInt((int) this.getHeight() + 1);
-            double z = this.getPosZ() - this.getWidth() / 2 + this.rand.nextInt((int) this.getWidth() + 1);
-            this.world.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
+        if (this.level.isClientSide) {
+            double x = this.getX() - this.getBbWidth() / 2 + this.random.nextInt((int) this.getBbWidth() + 1);
+            double y = this.getY() - this.getBbHeight() / 2 + this.random.nextInt((int) this.getBbHeight() + 1);
+            double z = this.getZ() - this.getBbWidth() / 2 + this.random.nextInt((int) this.getBbWidth() + 1);
+            this.level.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
         }
     }
 

@@ -1,7 +1,12 @@
 {
+  "block.planetary.brimstone" : "Brimstone",
+
   "block.planetary.succulight" : "Succulight",
   "block.planetary.potted_succulight" : "Potted Succulight",
 
   "block.planetary.skycap" : "Skycap",
-  "block.planetary.skycap_stem" : "Skycap Stem"
+  "block.planetary.skycap_stem" : "Skycap Stem",
+
+  "block.planetary.ivy" : "Ivy",
+  "block.planetary.mandrake" : "Mandrake"
 }

@@ -135,6 +135,8 @@ public class BlocksPlanetary {
     public static final RegistryObject<Block> SHROOMGLOW = BLOCKS.register("shroomglow", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GREEN).strength(0.5f).sound(SoundType.WOOL).lightLevel(state -> 8)));
     public static final RegistryObject<Block> SHROOMGLOW_LANTERN = BLOCKS.register("shroomglow_lantern", () -> new LanternBlock(Block.Properties.of(Material.METAL).strength(3.5F).sound(SoundType.LANTERN).lightLevel(state -> 12).noOcclusion()));
 
+    public static final RegistryObject<Block> BRIMSTONE = BLOCKS.register("brimstone", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_YELLOW).strength(0.75F, 1.5F).harvestLevel(0).harvestTool(ToolType.PICKAXE)));
+
     public static final RegistryObject<Block> DESERT_COAL_ORE = BLOCKS.register("desert_coal_ore", () -> new OreBlock(Block.Properties.of(Material.STONE, MaterialColor.SAND).strength(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(Blocks.COAL_ORE.getHarvestLevel(Blocks.COAL_ORE.defaultBlockState()))) {
         protected int xpOnDrop(java.util.Random rand) {
             return MathHelper.nextInt(rand, 0, 3);
@@ -204,6 +206,9 @@ public class BlocksPlanetary {
     public static final RegistryObject<Block> ICE_SLIME_BLOCK = BLOCKS.register("ice_slime_block", () -> new IceSlimeBlock(Block.Properties.of(Material.CLAY, MaterialColor.ICE).friction(1.98F).sound(SoundType.SLIME_BLOCK).noOcclusion()));
 
     public static final RegistryObject<Block> SKYCAP = BLOCKS.register("skycap", () -> new SkycapBlock(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BLUE).instabreak()));
+
+    public static final RegistryObject<Block> IVY = BLOCKS.register("ivy", () -> new VineBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE).noOcclusion()));
+    public static final RegistryObject<Block> MANDRAKE = BLOCKS.register("mandrake", () -> new Block(AbstractBlock.Properties.of(Material.PLANT).strength(4.0f).noCollission().noOcclusion()));
 
 
 

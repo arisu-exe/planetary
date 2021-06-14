@@ -29,5 +29,8 @@ public class RenderTypeLookupPlanetary {
         RenderTypeLookup.setRenderLayer(BlocksPlanetary.POTTED_SUCCULIGHT.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BlocksPlanetary.SKYCAP.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.IVY.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.MANDRAKE.get(), RenderType.cutout());
     }
 }
