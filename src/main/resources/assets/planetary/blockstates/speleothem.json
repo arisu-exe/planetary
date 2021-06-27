@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"": {
+			"model": "planetary:block/speleothem",
+			"x": 180
+		}
+	}
+}

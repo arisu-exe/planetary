@@ -1,0 +1,26 @@
+{
+	"variants": {
+		"toadstools=1": [
+			{
+				"model": "planetary:block/toadstool"
+			}
+		],
+		"toadstools=2": [
+			{
+				"model": "planetary:block/two_toadstools"
+			},
+			{
+				"model": "planetary:block/two_toadstools",
+				"y": 90
+			},
+			{
+				"model": "planetary:block/two_toadstools",
+				"y": 180
+			},
+			{
+				"model": "planetary:block/two_toadstools",
+				"y": 270
+			}
+		]
+	}
+}

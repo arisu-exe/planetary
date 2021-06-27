@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "planetary:block/twilight_petal_3"
+  }
+}

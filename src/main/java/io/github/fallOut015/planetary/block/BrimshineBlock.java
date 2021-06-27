@@ -1,5 +1,6 @@
 package io.github.fallOut015.planetary.block;
 
+import io.github.fallOut015.planetary.world.gen.feature.FeaturesPlanetary;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomBlock;
@@ -38,14 +39,13 @@ public class BrimshineBlock extends MushroomBlock {
     }
     public boolean growMushroom(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
         world.removeBlock(pos, false);
-        /*ConfiguredFeature<?, ?> configuredfeature = FeaturesTwo.HUGE_BRIMSHINE;
+        ConfiguredFeature<?, ?> configuredfeature = FeaturesPlanetary.Features.HUGE_BRIMSHINE;
 
-        if (configuredfeature.generate(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
+        if (configuredfeature.place(world, world.getChunkSource().getGenerator(), rand, pos)) {
             return true;
         } else {
-            world.setBlockState(pos, state, 3);
+            world.setBlock(pos, state, 3);
             return false;
-        }*/
-        return false;
+        }
     }
 }

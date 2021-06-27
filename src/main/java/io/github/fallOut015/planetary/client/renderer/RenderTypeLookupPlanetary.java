@@ -7,6 +7,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class RenderTypeLookupPlanetary {
     public static void doClientStuff(final FMLClientSetupEvent event) {
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.THICKET.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.THICKET_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.TOADSTOOL.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.TWILIGHT_PETAL.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlocksPlanetary.SPELEOTHEM.get(), RenderType.cutout());
+
         RenderTypeLookup.setRenderLayer(BlocksPlanetary.PURPETAL.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BlocksPlanetary.SPORESTONE_ROOTS.get(), RenderType.translucent());

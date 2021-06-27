@@ -15,7 +15,10 @@ public class ItemsPlanetary {
 
 
 
+
     // Building Blocks
+    public static final RegistryObject<Item> SCORIA = ITEMS.register("scoria", () -> new BlockItem(BlocksPlanetary.SCORIA.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
     public static final RegistryObject<Item> CHERRY_PLANKS = ITEMS.register("cherry_planks", () -> new BlockItem(BlocksPlanetary.CHERRY_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MAPLE_PLANKS = ITEMS.register("maple_planks", () -> new BlockItem(BlocksPlanetary.MAPLE_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 //	public static final RegistryObject<Item> NEONDOT_PLANKS = ITEMS.register(BlocksTwo.NEONDOT_PLANKS, new Item.Properties().group(ItemGroup.TAB_BUILDING_BLOCKS));
@@ -96,6 +99,12 @@ public class ItemsPlanetary {
     public static final RegistryObject<Item> PURPETAL_PISTOL = ITEMS.register("purpetal_pistol", () -> new BlockItem(BlocksPlanetary.PURPETAL_PISTOL.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     // Decoration
+    public static final RegistryObject<Item> THICKET = ITEMS.register("thicket", () -> new BlockItem(BlocksPlanetary.THICKET.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> TOADSTOOL = ITEMS.register("toadstool", () -> new BlockItem(BlocksPlanetary.TOADSTOOL.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> TWILIGHT_PETAL = ITEMS.register("twilight_petal", () -> new BlockItem(BlocksPlanetary.TWILIGHT_PETAL.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+
+    public static final RegistryObject<Item> SPELEOTHEM = ITEMS.register("speleothem", () -> new BlockItem(BlocksPlanetary.SPELEOTHEM.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+
     public static final RegistryObject<Item> SPORESTONE_ROOTS = ITEMS.register("sporestone_roots", () -> new BlockItem(BlocksPlanetary.SPORESTONE_ROOTS.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     public static final RegistryObject<Item> NEONDOT = ITEMS.register("neondot", () -> new BlockItem(BlocksPlanetary.NEONDOT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));

@@ -1,6 +1,7 @@
 package io.github.fallOut015.planetary.world.gen.feature;
 
 import com.mojang.serialization.Codec;
+import io.github.fallOut015.planetary.block.BlocksPlanetary;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
@@ -52,9 +53,9 @@ public class BigNeondotFeature extends AbstractBigMushroomFeature {
                         mutable.set(pos).move(l, i, i1).move(this.facing);
                         if (world.getBlockState(mutable).canBeReplacedByLeaves(world, mutable)) {
                             if(rand.nextInt(5) == 0) {
-                                //this.setBlockState(world, mutable, BlocksTwo.SHROOMGLOW.getDefaultState());
+                                this.setBlock(world, mutable, BlocksPlanetary.SHROOMGLOW.get().defaultBlockState());
                             } else {
-                                this.setBlock(world, mutable, config.stemProvider.getState(rand, pos));
+                                this.setBlock(world, mutable, config.capProvider.getState(rand, pos));
                             }
                             // change to assigning one dot per face.
                         }

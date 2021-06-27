@@ -1,5 +1,6 @@
 package io.github.fallOut015.planetary.block;
 
+import io.github.fallOut015.planetary.world.gen.feature.FeaturesPlanetary;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomBlock;
@@ -36,17 +37,16 @@ public class NeondotBlock extends MushroomBlock {
         BlockState blockstate = worldIn.getBlockState(pos.below());
         return worldIn.getRawBrightness(pos, 0) < 8 && blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
     }
-    public boolean growMushroom(ServerWorld p_226940_1_, BlockPos p_226940_2_, BlockState p_226940_3_, Random p_226940_4_) {
-        p_226940_1_.removeBlock(p_226940_2_, false);
-        /*ConfiguredFeature<?, ?> configuredfeature = FeaturesTwo.HUGE_NEONDOT;
+    public boolean growMushroom(ServerWorld level, BlockPos pos, BlockState state, Random random) {
+        level.removeBlock(pos, false);
+        ConfiguredFeature<?, ?> configuredfeature = FeaturesPlanetary.Features.HUGE_NEONDOT;
 
-        if (configuredfeature.generate(p_226940_1_, p_226940_1_.getChunkProvider().getChunkGenerator(), p_226940_4_, p_226940_2_)) {
+        if (configuredfeature.place(level, level.getChunkSource().getGenerator(), random, pos)) {
             return true;
         } else {
-            p_226940_1_.setBlockState(p_226940_2_, p_226940_3_, 3);
+            level.setBlock(pos, state, 3);
             return false;
-        }*/
-        return false;
+        }
     }
     @Override
     public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {

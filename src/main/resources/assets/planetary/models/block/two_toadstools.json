@@ -1,0 +1,7 @@
+{
+  "parent": "planetary:block/double_cross",
+  "textures": {
+    "cross": "planetary:block/toadstool",
+    "cross2": "planetary:block/two_toadstools"
+  }
+}
