@@ -2,13 +2,19 @@ package io.github.fallOut015.planetary.entity.passive;
 
 import io.github.fallOut015.planetary.client.renderer.entity.PenguinRenderer;
 import io.github.fallOut015.planetary.entity.EntitiesPlanetary;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.SlimeEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.MoveTowardsTargetGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -76,8 +82,8 @@ public class PenguinEntity extends AnimalEntity {
     }
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, true, TEMPTATION_ITEMS) {
+        //this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
+        /*this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, true, TEMPTATION_ITEMS) {
             @Override
             public boolean canContinueToUse() {
                 return this.mob instanceof PenguinEntity && !((PenguinEntity) this.mob).hasFish() && super.canContinueToUse();
@@ -86,13 +92,13 @@ public class PenguinEntity extends AnimalEntity {
             public boolean canUse() {
                 return this.mob instanceof PenguinEntity && !((PenguinEntity) this.mob).hasFish() && super.canUse();
             }
-        });
-        this.goalSelector.addGoal(3, new PenguinEntity.FeedChildGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+        });*/
+        //this.goalSelector.addGoal(3, new PenguinEntity.FeedChildGoal(this, 1.0D, 10));
+        //this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 1.0D, 32.0F));
-        this.goalSelector.addGoal(6, new RandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 10.0F));
-        this.goalSelector.addGoal(8, new PanicGoal(this, 1.75D));
+        //this.goalSelector.addGoal(6, new RandomWalkingGoal(this, 1.0D));
+        //this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 10.0F));
+        //this.goalSelector.addGoal(8, new PanicGoal(this, 1.75D));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFishEntity.class, false));
     }
     @Override
@@ -113,8 +119,10 @@ public class PenguinEntity extends AnimalEntity {
             this.entityData.set(FISH, fish);
         }
     }
-    public void removeFish() {
+    public ItemStack removeFish() {
+        ItemStack stack = this.getFish();
         this.entityData.set(FISH, ItemStack.EMPTY);
+        return stack;
     }
     public int getVariant() {
         return this.entityData.get(VARIANT).intValue();
@@ -137,15 +145,18 @@ public class PenguinEntity extends AnimalEntity {
     }
     @Override
     public void push(Entity entityIn) {
-        if(entityIn.getType() == EntityType.SALMON) {
-            entityIn.remove();
-            this.setFish(new ItemStack(Items.SALMON));
-        } else if(entityIn.getType() == EntityType.COD) {
-            entityIn.remove();
-            this.setFish(new ItemStack(Items.COD));
-        } else if(entityIn instanceof PenguinEntity && entityIn.getType() == EntitiesPlanetary.PENGUIN.get() && ((PenguinEntity) entityIn).isBaby()) {
-            ((PenguinEntity) entityIn).setFish(this.getFish());
-            this.removeFish();
+        if(this.hasFish()) {
+            if(entityIn instanceof PenguinEntity && entityIn.getType() == EntitiesPlanetary.PENGUIN.get() && ((PenguinEntity) entityIn).isBaby()) {
+                ((PenguinEntity) entityIn).setFish(this.removeFish());
+            }
+        } else {
+            if(entityIn.getType() == EntityType.SALMON) {
+                entityIn.remove();
+                this.setFish(new ItemStack(Items.SALMON));
+            } else if(entityIn.getType() == EntityType.COD) {
+                entityIn.remove();
+                this.setFish(new ItemStack(Items.COD));
+            }
         }
 
         super.push(entityIn);

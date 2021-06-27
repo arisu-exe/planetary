@@ -86,6 +86,8 @@ public class ItemsPlanetary {
 	public static final RegistryObject<Item> DESERT_GOLD_ORE = ITEMS.register("desert_gold_ore", () -> new BlockItem(BlocksPlanetary.DESERT_GOLD_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> DESERT_COPPER_ORE = ITEMS.register("desert_copper_ore", () -> new BlockItem(BlocksPlanetary.DESERT_COPPER_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
+	public static final RegistryObject<Item> CRACKED_SAND = ITEMS.register("cracked_sand", () -> new BlockItem(BlocksPlanetary.CRACKED_SAND.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
     public static final RegistryObject<Item> SPORESTONE = ITEMS.register("sporestone", () -> new BlockItem(BlocksPlanetary.SPORESTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> SPORESTONE_SOIL = ITEMS.register("sporestone_soil", () -> new BlockItem(BlocksPlanetary.SPORESTONE_SOIL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 

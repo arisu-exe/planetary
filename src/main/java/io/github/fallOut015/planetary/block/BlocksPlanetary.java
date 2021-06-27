@@ -120,16 +120,18 @@ public class BlocksPlanetary {
     // neondot wall sign
     // brimshine wall sign
 
+    public static final RegistryObject<Block> CRACKED_SAND = BLOCKS.register("cracked_sand", () -> new Block(AbstractBlock.Properties.of(Material.SAND).strength(1.0f)));
+
     public static final RegistryObject<Block> SPORESTONE = BLOCKS.register("sporestone", () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(1.0f, 4.0f).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> SPORESTONE_SOIL = BLOCKS.register("sporestone_soil", () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.GRASS).strength(1.0f, 4.0f).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> SPORESTONE_ROOTS = BLOCKS.register("sporestone_roots", () -> new SporestoneRootsBlock(Block.Properties.of(Material.GRASS, MaterialColor.GRASS).strength(0.2f).noOcclusion()));
 
     // make dots glow
-    public static final RegistryObject<Block> NEONDOT = BLOCKS.register("neondot", () -> new NeondotBlock(Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).lightLevel(state -> 4)));
-    public static final RegistryObject<Block> BRIMSHINE = BLOCKS.register("brimshine", () -> new BrimshineBlock(Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).lightLevel(state -> 4)));
+    public static final RegistryObject<Block> NEONDOT = BLOCKS.register("neondot", () -> new NeondotBlock(Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).lightLevel(state -> 4).emissiveRendering((s, l, p) -> true)));
+    public static final RegistryObject<Block> BRIMSHINE = BLOCKS.register("brimshine", () -> new BrimshineBlock(Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).lightLevel(state -> 4).emissiveRendering((s, l, p) -> true)));
 
-    public static final RegistryObject<Block> POTTED_NEONDOT = BLOCKS.register("potted_neondot", () -> new FlowerPotBlockPlanetary(() -> (FlowerPotBlock) Blocks.FLOWER_POT, NEONDOT, Block.Properties.of(Material.DECORATION).strength(0).noOcclusion()));
-    public static final RegistryObject<Block> POTTED_BRIMSHINE = BLOCKS.register("potted_brimshine", () -> new FlowerPotBlockPlanetary(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BRIMSHINE, Block.Properties.of(Material.DECORATION).strength(0).noOcclusion()));
+    public static final RegistryObject<Block> POTTED_NEONDOT = BLOCKS.register("potted_neondot", () -> new FlowerPotBlockPlanetary(() -> (FlowerPotBlock) Blocks.FLOWER_POT, NEONDOT, Block.Properties.of(Material.DECORATION).strength(0).noOcclusion().lightLevel(state -> 3)));
+    public static final RegistryObject<Block> POTTED_BRIMSHINE = BLOCKS.register("potted_brimshine", () -> new FlowerPotBlockPlanetary(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BRIMSHINE, Block.Properties.of(Material.DECORATION).strength(0).noOcclusion().lightLevel(state -> 3)));
 
     // make shroomglow glow
     public static final RegistryObject<Block> SHROOMGLOW = BLOCKS.register("shroomglow", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GREEN).strength(0.5f).sound(SoundType.WOOL).lightLevel(state -> 8)));
@@ -207,7 +209,7 @@ public class BlocksPlanetary {
 
     public static final RegistryObject<Block> SKYCAP = BLOCKS.register("skycap", () -> new SkycapBlock(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BLUE).instabreak()));
 
-    public static final RegistryObject<Block> IVY = BLOCKS.register("ivy", () -> new VineBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE).noOcclusion()));
+    public static final RegistryObject<Block> IVY = BLOCKS.register("ivy", () -> new IvyBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE).noOcclusion()));
     public static final RegistryObject<Block> MANDRAKE = BLOCKS.register("mandrake", () -> new Block(AbstractBlock.Properties.of(Material.PLANT).strength(4.0f).noCollission().noOcclusion()));
 
 

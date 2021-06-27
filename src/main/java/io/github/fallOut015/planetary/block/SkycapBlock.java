@@ -26,10 +26,10 @@ public class SkycapBlock extends Block {
     protected static final VoxelShape CAP = Block.box(2.0D, 6.0D, 2.0D, 14.0D, 12.0D, 14.0D);
     protected static final VoxelShape STEM = Block.box(7.0D, 0.0D, 7.0D, 9.0D, 12.0D, 9.0D);
     protected static final VoxelShape PARTIAL_STEM = Block.box(7.0D, 2.0D, 7.0D, 9.0D, 12.0D, 9.0D);
-    protected static final VoxelShape NORTH_STEM = Block.box(7.0D, 2.0D, 0.0D, 9.0D, 4.0D, 9.0D);
+    protected static final VoxelShape NORTH_STEM = Block.box(7.0D, 2.0D, 0.0D, 9.0D, 4.0D, 9.0D); // fix
     protected static final VoxelShape EAST_STEM = Block.box(0.0D, 2.0D, 7.0D, 9.0D, 4.0D, 9.0D);
     protected static final VoxelShape SOUTH_STEM = Block.box(7.0D, 2.0D, 7.0D, 9.0D, 4.0D, 0.0D);
-    protected static final VoxelShape WEST_STEM = Block.box(7.0D, 2.0D, 7.0D, 9.0D, 4.0D, 0.0D);
+    protected static final VoxelShape WEST_STEM = Block.box(7.0D, 2.0D, 7.0D, 9.0D, 4.0D, 0.0D); // TODO fix
     protected static final VoxelShape NONATTACHED_SHAPE = VoxelShapes.or(CAP, STEM);
     protected static final VoxelShape ATTACHED_SHAPE = VoxelShapes.or(CAP, PARTIAL_STEM);
 
@@ -51,10 +51,8 @@ public class SkycapBlock extends Block {
                 case WEST:
                     return VoxelShapes.or(ATTACHED_SHAPE, WEST_STEM);
             }
-            return NONATTACHED_SHAPE;
-        } else {
-            return NONATTACHED_SHAPE;
         }
+        return NONATTACHED_SHAPE;
     }
     @Nullable
     @Override

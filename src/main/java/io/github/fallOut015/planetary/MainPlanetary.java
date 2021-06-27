@@ -116,6 +116,10 @@ public class MainPlanetary  {
                     biomeLoadingEvent.getGeneration().getFeatures(GenerationStage.Decoration.TOP_LAYER_MODIFICATION).add(() -> FeaturesPlanetary.Features.BADLANDS_ARCH);
 
                     break;
+                case MUSHROOM:
+                    biomeLoadingEvent.getGeneration().getFeatures(GenerationStage.Decoration.RAW_GENERATION).add(() -> FeaturesPlanetary.Features.MUSHROOM_STONE_REPLACER);
+
+                    break;
             }
         }
     }
