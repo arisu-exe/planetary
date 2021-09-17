@@ -1,0 +1,9 @@
+{
+	"item.armor.equip_lead" : {
+		"category" : "item",
+		"subtitle" : "subtitles.item.armor.equip_lead",
+		"sounds" : [
+			"planetary:item/armor/equip_lead"
+		]
+	}
+}
